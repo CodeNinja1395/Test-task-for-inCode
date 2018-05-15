@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Projects from './components/Projects.js';
+import UsersList from './components/UsersList.js';
 import axios from 'axios';
 import './App.css';
 
@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <div className="App">
         myApp
-        <Projects items={this.state.items} />
+        <UsersList items={this.state.items} />
       </div>
     );
   }
