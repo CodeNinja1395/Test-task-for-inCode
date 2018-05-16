@@ -24,7 +24,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <SearchUser />
+        
         <UsersList items={this.state.items} />
       </div>
     );

@@ -1,0 +1,28 @@
+.user-avatar {
+  border-radius: 50%;
+  margin: 5px;
+}
+.user-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+.user-phone {
+  font-size: 16px;
+  color: grey;
+}
+.users {
+  width: 300px;
+  margin: 0 auto;
+}
+.usersList{
+  padding: 0;
+  width: 100%;
+}
+.User {
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  width: 100%;
+  padding: 5px;
+  border-bottom: 1px solid grey;
+}

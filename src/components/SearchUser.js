@@ -5,7 +5,7 @@ class SearchUser extends Component {
   render() {
       return (
         <form action="">
-        <input type="text" ref="title" className="SearchUser"/>
+        <input type="text" ref="title" className="SearchUser" onChange={this.props.handleEvent}/>
         </form>
 
       )

@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import User from './User.js';
+import SearchUser from './SearchUser.js';
 
 
 class UsersList extends Component {
+  handleEvent(event){
+    console.log(event.target.value);
+  }
+
+  getInitial
 
   render() {
     let users;
@@ -13,9 +19,10 @@ class UsersList extends Component {
         );
       });
     }
-    
+
     return (
       <div className="users">
+        <SearchUser handleEvent={this.handleEvent}/>
         <ul className = "usersList">{users}</ul>
       </div>);
 
