@@ -8,15 +8,16 @@ class UsersList extends Component {
     let users;
     if (this.props.items) {
       users = this.props.items.map(function (usr) {
-        console.log(usr);
         return (
-          <User key={usr} user={usr} />
+          <User key={usr.contact.phone} user={usr} />
         );
       });
     }
-    return (<div className="UsersList">
-    {users}
-    </div>);
+    
+    return (
+      <div className="users">
+        <ul className = "usersList">{users}</ul>
+      </div>);
 
   }
 }

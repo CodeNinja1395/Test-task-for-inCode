@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UsersList from './components/UsersList.js';
+import SearchUser from './components/SearchUser.js';
 import axios from 'axios';
 import './App.css';
 
@@ -10,16 +11,20 @@ class App extends Component {
     this.state = {
          items: [],
    }
-   axios.get('https://raw.githubusercontent.com/CodeNinja1395/InCode-test-project/master/clients.json')
-    .then(res => {
-        this.setState({ items: res.data });
-   });
+
+  }
+
+  componentWillMount(){
+    axios.get('https://raw.githubusercontent.com/CodeNinja1395/InCode-test-project/master/clients.json')
+     .then(res => {
+         this.setState({ items: res.data });
+    });
   }
 
   render() {
     return (
       <div className="App">
-        myApp
+        <SearchUser />
         <UsersList items={this.state.items} />
       </div>
     );
