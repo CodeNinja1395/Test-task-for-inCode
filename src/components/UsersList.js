@@ -4,11 +4,23 @@ import SearchUser from './SearchUser.js';
 
 
 class UsersList extends Component {
-  handleEvent(event){
-    console.log(event.target.value);
+  constructor() {
+    super();
+    this.handleSearch = this.handleSearch.bind(this);
+    // this.state = this;
+
   }
 
-  getInitial
+  handleSearch(event){
+    let CONTACTS = this.props.items;
+    let inputValue = event.target.value;
+    var userList = CONTACTS.filter(function (el) {
+      let searchValue = el.general.firstName;
+      return searchValue.indexOf(inputValue) !== -1;
+    });
+    console.log(userList);
+    return userList;
+  }
 
   render() {
     let users;
@@ -22,10 +34,9 @@ class UsersList extends Component {
 
     return (
       <div className="users">
-        <SearchUser handleEvent={this.handleEvent}/>
+        <SearchUser handleEvent={this.handleSearch}/>
         <ul className = "usersList">{users}</ul>
       </div>);
-
   }
 }
 
