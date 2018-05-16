@@ -4,28 +4,33 @@ import SearchUser from './SearchUser.js';
 
 
 class UsersList extends Component {
-  constructor() {
+  constructor(){
     super();
-    this.handleSearch = this.handleSearch.bind(this);
-    // this.state = this;
+    this.state = {
+      displayedUsers: []
+    }
+  }
 
+  componentWillReceiveProps(newProps) {
+    this.setState({displayedUsers: newProps.items});
   }
 
   handleSearch(event){
+    console.log(event.target.value);
     let CONTACTS = this.props.items;
     let inputValue = event.target.value;
-    var userList = CONTACTS.filter(function (el) {
-      let searchValue = el.general.firstName;
+    var displayedUsers = CONTACTS.filter(function (el) {
+      let searchValue = el.general.firstName.toLowerCase();
       return searchValue.indexOf(inputValue) !== -1;
     });
-    console.log(userList);
-    return userList;
+
+    this.setState({displayedUsers: displayedUsers});
   }
 
   render() {
     let users;
-    if (this.props.items) {
-      users = this.props.items.map(function (usr) {
+    if (this.state.displayedUsers) {
+      users = this.state.displayedUsers.map(function (usr) {
         return (
           <User key={usr.contact.phone} user={usr} />
         );
@@ -34,7 +39,7 @@ class UsersList extends Component {
 
     return (
       <div className="users">
-        <SearchUser handleEvent={this.handleSearch}/>
+        <SearchUser handleEvent={this.handleSearch.bind(this)}/>
         <ul className = "usersList">{users}</ul>
       </div>);
   }
