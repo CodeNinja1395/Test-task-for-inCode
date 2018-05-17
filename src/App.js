@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import UsersList from './components/UsersList.js';
-import SearchUser from './components/SearchUser.js';
+import UserInfo from './components/UserInfo.js';
 import axios from 'axios';
-import './App.css';
-
+import './css/bootstrap.min.css';
 
 class App extends Component {
   constructor(){
@@ -23,10 +22,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-
-        <UsersList items={this.state.items} />
-      </div>
+            <div className="App">
+              <UsersList items={this.state.items} />
+            </div>
     );
   }
 

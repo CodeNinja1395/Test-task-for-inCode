@@ -1,0 +1,55 @@
+.left-column {
+ float: left;
+}
+.right-column {
+  float:left;
+  position: fixed;
+  min-height: 800px;
+  min-width: 1150px;
+  margin-left: 315px;
+  border: solid black 1px;
+  background: #eee;
+}
+
+
+
+.usersList {
+  padding: 0;
+  width: 100%;
+}
+.user-info {
+
+  padding: 0;
+
+}
+.User {
+  display: flex;
+  align-items: center ;
+  font-family: sans-serif;
+  width: 100%;
+  padding: 5px;
+  border-bottom: 1px solid grey;
+}
+
+.search-user {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  margin: 5px;
+}
+.user-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+.user-phone {
+  font-size: 16px;
+  color: grey;
+}
+.users {
+  width: 315px;
+
+}

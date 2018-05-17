@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import User from './User.js';
 import SearchUser from './SearchUser.js';
+import UserInfo from './UserInfo.js';
 
 
 class UsersList extends Component {
   constructor(){
     super();
     this.state = {
-      displayedUsers: []
+      displayedUsers: [],
+      selectedUser: ''
     }
   }
 
@@ -29,6 +31,7 @@ class UsersList extends Component {
 
   render() {
     let users;
+
     if (this.state.displayedUsers) {
       users = this.state.displayedUsers.map(function (usr) {
         return (
@@ -38,10 +41,18 @@ class UsersList extends Component {
     }
 
     return (
-      <div className="users">
-        <SearchUser handleEvent={this.handleSearch.bind(this)}/>
-        <ul className = "usersList">{users}</ul>
-      </div>);
+      <div>
+        <div class="left-column">
+          <div className="users">
+              <SearchUser handleEvent={this.handleSearch.bind(this)}/>
+              <ul className = "usersList">{users}</ul>
+          </div>
+        </div>
+        <div class ="right-column">
+          <UserInfo selectedUser={users[0]}/>
+        </div>
+      </div>
+      );
   }
 }
 
