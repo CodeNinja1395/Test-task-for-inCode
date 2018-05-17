@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import User from './User.js';
 import SearchUser from './SearchUser.js';
-import UserInfo from './UserInfo.js';
+import ContactDetail from './ContactDetail.js';
 
-
-class UsersList extends Component {
+class ContactsApp extends Component {
   constructor(){
     super();
     this.state = {
       displayedUsers: [],
-      selectedUser: ''
+      selectedUser: null
     }
   }
 
@@ -29,31 +28,40 @@ class UsersList extends Component {
     this.setState({displayedUsers: displayedUsers});
   }
 
+
+  handleSelectedUser(user){
+    console.log(user);
+  }
+
   render() {
+    //console.log("ContactsApp rendered");
     let users;
+
+    let selectElem = this.selectElement;
 
     if (this.state.displayedUsers) {
       users = this.state.displayedUsers.map(function (usr) {
         return (
-          <User key={usr.contact.phone} user={usr} />
+          <User  key={usr.contact.phone} user={usr} />
+        //selectUser={this.handleSelectedUser}
         );
       });
     }
 
     return (
       <div>
-        <div class="left-column">
+        <div className="left-column">
           <div className="users">
-              <SearchUser handleEvent={this.handleSearch.bind(this)}/>
-              <ul className = "usersList">{users}</ul>
+              <SearchUser handleEvent= {this.handleSearch.bind(this)} />
+              <ul className="usersList"> {users} </ul>
           </div>
         </div>
-        <div class ="right-column">
-          <UserInfo selectedUser={users[0]}/>
+        <div className="right-column">
+          <ContactDetail someInfo={this.handleSelectedUser.bind(this)} selectedUser={this.props.items[3]} />
         </div>
       </div>
       );
   }
 }
 
-export default UsersList;
+export default ContactsApp;

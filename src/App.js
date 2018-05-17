@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import UsersList from './components/UsersList.js';
-import UserInfo from './components/UserInfo.js';
+import ContactsApp from './components/ContactsApp.js';
 import axios from 'axios';
 import './css/bootstrap.min.css';
 
@@ -23,7 +22,7 @@ class App extends Component {
   render() {
     return (
             <div className="App">
-              <UsersList items={this.state.items} />
+              <ContactsApp items={this.state.items} />
             </div>
     );
   }
