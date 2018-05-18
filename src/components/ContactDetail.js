@@ -22,16 +22,17 @@ class ContactDetail extends Component {
     let selectedUser = this.state.user;
 
     return (
-      <div class = "user-detail">
-        <div class ="user-detail-main">
+      <div className = "user-detail">
+        <div className ="user-detail-img">
           <img src={selectedUser.general.avatar} alt=""/>
         </div>
-        <div>
-          <h1>{selectedUser.general.firstName} {selectUser.general.lastName}</h1>
-          <h2>{selectedUser.job.title} {selectUser.job.company}</h2>
+        <div className = "user-detail-text">
+          <h1>{selectedUser.general.firstName} {selectedUser.general.lastName}</h1>
+          <h2>{selectedUser.job.title} - {selectedUser.job.company}</h2>
+          <h4>email: {selectedUser.contact.email}</h4>
+          <h4>phone: {selectedUser.contact.phone}</h4>
+          <h4>address: {selectedUser.address.street}, {selectedUser.address.city} {selectedUser.address.zipcode}, {selectedUser.address.country}</h4>
         </div>
-
-
       </div>
 
     );

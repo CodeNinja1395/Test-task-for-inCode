@@ -8,7 +8,6 @@
   min-width: 1150px;
   margin-left: 315px;
   border: solid black 1px;
-  background: #eee;
 }
 
 .usersList {
@@ -55,7 +54,15 @@
 .user-detail {
   padding: 47px;
 }
-.user-detail img {
+.user-detail-img {
   float: left;
   padding-right: 30px;
+  min-height: 300px;
+}
+.user-detail-text {
+  margin-top: -9px;
+}
+.user-detail-text h1 h2 h3 h4 {
+  border-bottom: 1px solid grey;
+  font-size: 15px;
 }

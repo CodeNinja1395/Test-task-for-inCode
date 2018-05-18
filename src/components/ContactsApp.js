@@ -29,14 +29,24 @@ class ContactsApp extends Component {
     this.setState({displayedUsers: displayedUsers});
   }
 
-
-  handleSelectedUser(state){    
+  iterate(obj) {
+    for (var property in obj) {
+      if (obj.hasOwnProperty(property)) {
+          if (typeof obj[property] == "object") {
+              this.iterate(obj[property]);
+          } else {
+              return obj[property];
+          }
+      }
+    }
+  }
+  handleSelectedUser(state){
     this.setState({selectedUser: state}, function (){
     });
   }
 
   render() {
-
+    this.iterate(this.props);
     let users;
 
     let selectElem = this.selectElement;
@@ -45,7 +55,7 @@ class ContactsApp extends Component {
       users = this.state.displayedUsers.map(usr => {
         return (
           <User  key={usr.contact.phone} user={usr} selectUser={this.handleSelectedUser.bind(this)}/>
-          //this one throwing this mistake: "ContactsApp.js:44 Uncaught TypeError: Cannot read property 'handleSelectedUser' of undefined"
+
         );
       });
     }
