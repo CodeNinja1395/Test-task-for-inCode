@@ -10,6 +10,7 @@ class ContactsApp extends Component {
       displayedUsers: [],
       selectedUser: null
     }
+
   }
 
   componentWillReceiveProps(newProps) {
@@ -29,25 +30,33 @@ class ContactsApp extends Component {
   }
 
 
-  handleSelectedUser(user){
-    console.log(user);
+  handleSelectedUser(state){    
+    this.setState({selectedUser: state}, function (){
+    });
   }
 
   render() {
-    //console.log("ContactsApp rendered");
+
     let users;
 
     let selectElem = this.selectElement;
 
     if (this.state.displayedUsers) {
-      users = this.state.displayedUsers.map(function (usr) {
+      users = this.state.displayedUsers.map(usr => {
         return (
-          <User  key={usr.contact.phone} user={usr} />
-        //selectUser={this.handleSelectedUser}
+          <User  key={usr.contact.phone} user={usr} selectUser={this.handleSelectedUser.bind(this)}/>
+          //this one throwing this mistake: "ContactsApp.js:44 Uncaught TypeError: Cannot read property 'handleSelectedUser' of undefined"
         );
       });
     }
 
+    // let selected;
+    // if(this.state.selectedUser){
+    //   selected = this.state.selectedUser;
+    // }
+    // else {
+    //   selected = this.props.items[0];
+    // }
     return (
       <div>
         <div className="left-column">
@@ -57,7 +66,7 @@ class ContactsApp extends Component {
           </div>
         </div>
         <div className="right-column">
-          <ContactDetail someInfo={this.handleSelectedUser.bind(this)} selectedUser={this.props.items[3]} />
+          <ContactDetail selectedUser={this.state.selectedUser} />
         </div>
       </div>
       );

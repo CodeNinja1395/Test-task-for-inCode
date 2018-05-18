@@ -11,8 +11,6 @@
   background: #eee;
 }
 
-
-
 .usersList {
   padding: 0;
   width: 100%;
@@ -52,4 +50,12 @@
 .users {
   width: 315px;
 
+}
+
+.user-detail {
+  padding: 47px;
+}
+.user-detail img {
+  float: left;
+  padding-right: 30px;
 }

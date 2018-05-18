@@ -4,41 +4,43 @@ class ContactDetail extends Component {
   constructor(){
     super();
     this.state = {
-      user: {}
-    };
-  }
-  componentWillMount(){
-    this.setState({user: this.props.selectedUser});
+      user: null
+    }
   }
 
-  handleClickEvent(){
-    this.setState({user: this.props.selectedUser},
-      function () {
-        console.log(this.state);
-      this.props.someInfo(this.state.user);
-    });
-  } //test function
+  componentWillReceiveProps(newProps) {
+    this.setState({user: newProps.selectedUser})
+  }
 
   render() {
+    console.log(this.state.user);
     if(!this.props.selectedUser){
+      console.log("nope");
       return null;
     }
 
-    else {
-      let user = this.props.selectedUser;
+    let selectedUser = this.state.user;
 
-      return (
-        <div className="user-info">
-          <img className="detail-image" onClick={this.handleClickEvent.bind(this)} src={user.general.avatar} alt=""/>
-          <h1>{user.general.firstName} {user.general.lastName}</h1>
-          <h2>{user.job.title} - {user.job.company}</h2>
+    return (
+      <div class = "user-detail">
+        <div class ="user-detail-main">
+          <img src={selectedUser.general.avatar} alt=""/>
         </div>
-      )
-    }
+        <div>
+          <h1>{selectedUser.general.firstName} {selectUser.general.lastName}</h1>
+          <h2>{selectedUser.job.title} {selectUser.job.company}</h2>
+        </div>
+
+
+      </div>
+
+    );
+
+
+
+
+
 
   }
-
-
-
 }
 export default ContactDetail;
