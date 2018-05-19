@@ -13,9 +13,7 @@ class ContactDetail extends Component {
   }
 
   render() {
-    console.log(this.state.user);
     if(!this.props.selectedUser){
-      console.log("nope");
       return null;
     }
 

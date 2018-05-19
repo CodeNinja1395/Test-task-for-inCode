@@ -18,35 +18,55 @@ class ContactsApp extends Component {
   }
 
   handleSearch(event){
-    console.log(event.target.value);
     let CONTACTS = this.props.items;
     let inputValue = event.target.value;
-    var displayedUsers = CONTACTS.filter(function (el) {
-      let searchValue = el.general.firstName.toLowerCase();
-      return searchValue.indexOf(inputValue) !== -1;
-    });
 
-    this.setState({displayedUsers: displayedUsers});
-  }
 
-  iterate(obj) {
-    for (var property in obj) {
-      if (obj.hasOwnProperty(property)) {
-          if (typeof obj[property] == "object") {
-              this.iterate(obj[property]);
-          } else {
-              return obj[property];
-          }
-      }
+
+    let iterate = function(obj, callback) {
+        for (var property in obj) {
+            if (obj.hasOwnProperty(property)) {
+                if (typeof obj[property] == "object") {
+                    iterate(obj[property], callback);
+                } else {
+                    console.log(obj[property]);
+                    callback(obj[property]);
+                }
+            }
+        }
     }
+
+
+     var displayedUsers = CONTACTS.filter(el => {
+
+      let arr = [];
+      iterate(el, function (e) {
+         arr.push(e);
+      });
+
+      for (var i = 0; i < arr.length; i++) {
+        if(arr[i].toLowerCase().indexOf(inputValue) !== -1){
+          return arr[i];
+        }
+      }
+
+      // var searchValue = el.general.firstName.toLowerCase()+ el.general.lastName.toLowerCase();
+      // return searchValue.indexOf(inputValue) !== -1; //
+   });
+
+   this.setState({displayedUsers: displayedUsers});
+
   }
+
+
+
   handleSelectedUser(state){
     this.setState({selectedUser: state}, function (){
     });
   }
 
   render() {
-    this.iterate(this.props);
+
     let users;
 
     let selectElem = this.selectElement;
