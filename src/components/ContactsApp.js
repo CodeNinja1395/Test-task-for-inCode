@@ -8,7 +8,8 @@ class ContactsApp extends Component {
     super();
     this.state = {
       displayedUsers: [],
-      selectedUser: null
+      selectedUser: null,
+
     }
 
   }
@@ -21,49 +22,45 @@ class ContactsApp extends Component {
     let CONTACTS = this.props.items;
     let inputValue = event.target.value;
 
-
-
     let iterate = function(obj, callback) {
         for (var property in obj) {
             if (obj.hasOwnProperty(property)) {
                 if (typeof obj[property] == "object") {
                     iterate(obj[property], callback);
                 } else {
-                    console.log(obj[property]);
                     callback(obj[property]);
                 }
             }
         }
     }
 
+    var foundInfo = [];
 
-     var displayedUsers = CONTACTS.filter(el => {
+    var displayedUsers = CONTACTS.filter(el => {
+      //console.log(el);
+    let arr = [];
 
-      let arr = [];
-      iterate(el, function (e) {
+    iterate(el, function (e) {
          arr.push(e);
-      });
+    });
 
-      for (var i = 0; i < arr.length; i++) {
+    for (var i = 0; i < arr.length; i++) {
         if(arr[i].toLowerCase().indexOf(inputValue) !== -1){
+          foundInfo = arr[i];
           return arr[i];
         }
       }
-
-      // var searchValue = el.general.firstName.toLowerCase()+ el.general.lastName.toLowerCase();
-      // return searchValue.indexOf(inputValue) !== -1; //
-   });
+    });
 
    this.setState({displayedUsers: displayedUsers});
 
   }
 
-
-
-  handleSelectedUser(state){
-    this.setState({selectedUser: state}, function (){
+  handleSelectedUser(user, color){
+    this.setState({selectedUser: user}, function (){
     });
   }
+
 
   render() {
 
@@ -72,21 +69,22 @@ class ContactsApp extends Component {
     let selectElem = this.selectElement;
 
     if (this.state.displayedUsers) {
-      users = this.state.displayedUsers.map(usr => {
-        return (
-          <User  key={usr.contact.phone} user={usr} selectUser={this.handleSelectedUser.bind(this)}/>
+      users = this.state.displayedUsers.map(user => {
 
+        console.log(user==this.state.selectedUser);
+
+        return (
+          <User
+            key={user.contact.phone}
+            user={user}
+            color = {(user==this.state.selectedUser) ? 'LightSkyBlue ' : 'white'}
+            selectUser={this.handleSelectedUser.bind(this)}
+          />
         );
       });
     }
 
-    // let selected;
-    // if(this.state.selectedUser){
-    //   selected = this.state.selectedUser;
-    // }
-    // else {
-    //   selected = this.props.items[0];
-    // }
+
     return (
       <div>
         <div className="left-column">
@@ -100,7 +98,7 @@ class ContactsApp extends Component {
         </div>
       </div>
       );
-  }
+    }
 }
 
 export default ContactsApp;
