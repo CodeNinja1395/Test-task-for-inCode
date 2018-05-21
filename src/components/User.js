@@ -17,15 +17,20 @@ class User extends Component {
 
   handleSelectUser(){
     this.props.selectUser(this.state.user);
-
   }
 
 
   render() {
-    console.log(this.props);
     let user = this.props.user;
-
-    if (user) {
+    console.log(this.props);
+    if (this.props.searchValue) {
+      return (
+        <li style={{background: this.props.color}} className="User" onClick= {this.handleSelectUser.bind(this)}>
+          <div> <h5>{user.foundValue}</h5></div>
+        </li>
+    );
+    }
+    else {
       return (
         <li style={{background: this.props.color}} className="User" onClick= {this.handleSelectUser.bind(this)}>
             <img className="user-avatar" src={user.general.avatar} alt="" height="60px" width="60px"/>

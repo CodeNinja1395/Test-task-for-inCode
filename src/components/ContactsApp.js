@@ -9,7 +9,7 @@ class ContactsApp extends Component {
     this.state = {
       displayedUsers: [],
       selectedUser: null,
-
+      searchValue: ''
     }
 
   }
@@ -21,7 +21,7 @@ class ContactsApp extends Component {
   handleSearch(event){
     let CONTACTS = this.props.items;
     let inputValue = event.target.value;
-
+    this.setState({searchValue: inputValue});
     let iterate = function(obj, callback) {
         for (var property in obj) {
             if (obj.hasOwnProperty(property)) {
@@ -37,20 +37,21 @@ class ContactsApp extends Component {
     var foundInfo = [];
 
     var displayedUsers = CONTACTS.filter(el => {
-      //console.log(el);
-    let arr = [];
 
-    iterate(el, function (e) {
-         arr.push(e);
-    });
+      let arr = [];
+      iterate(el, function (e) {
+           arr.push(e);
+      });
 
-    for (var i = 0; i < arr.length; i++) {
-        if(arr[i].toLowerCase().indexOf(inputValue) !== -1){
-          foundInfo = arr[i];
-          return arr[i];
+      for (var i = 0; i < arr.length; i++) {
+          if(arr[i].toLowerCase().indexOf(inputValue) !== -1){
+            el.foundValue = arr[i];
+            return arr[i];
+
+          }
         }
-      }
     });
+
 
    this.setState({displayedUsers: displayedUsers});
 
@@ -66,19 +67,20 @@ class ContactsApp extends Component {
 
     let users;
 
+    //console.log(this.state.displayedUsers);
+
     let selectElem = this.selectElement;
 
     if (this.state.displayedUsers) {
       users = this.state.displayedUsers.map(user => {
 
-        console.log(user==this.state.selectedUser);
-
         return (
           <User
             key={user.contact.phone}
             user={user}
-            color = {(user==this.state.selectedUser) ? 'LightSkyBlue ' : 'white'}
+            color={(user==this.state.selectedUser) ? 'LightSkyBlue ' : 'white'}
             selectUser={this.handleSelectedUser.bind(this)}
+            searchValue={this.state.searchValue}
           />
         );
       });
