@@ -22,7 +22,7 @@ class User extends Component {
 
   render() {
     let user = this.props.user;
-    console.log(this.props);
+  //  console.log(this.props);
     if (this.props.searchValue) {
       return (
         <li style={{background: this.props.color}} className="User" onClick= {this.handleSelectUser.bind(this)}>

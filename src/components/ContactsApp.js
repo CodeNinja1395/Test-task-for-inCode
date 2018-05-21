@@ -39,7 +39,8 @@ class ContactsApp extends Component {
     var displayedUsers = CONTACTS.filter(el => {
 
       let arr = [];
-      iterate(el, function (e) {
+      iterate(el, function (e) {        
+        if (e!=el.general.avatar)
            arr.push(e);
       });
 
