@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   componentWillMount(){
-    axios.get('https://raw.githubusercontent.com/CodeNinja1395/InCode-test-project/master/clients.json')
+    axios.get('https://raw.githubusercontent.com/CodeNinja1395/Test-task-for-inCode/master/clients.json')
      .then(res => {
          this.setState({ items: res.data });
     });
