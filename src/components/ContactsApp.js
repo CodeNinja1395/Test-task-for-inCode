@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import User from './User.js';
 import SearchUser from './SearchUser.js';
 import ContactDetail from './ContactDetail.js';
+import '../css/style.css';
 
 class ContactsApp extends Component {
   constructor(){
     super();
     this.state = {
+      searchResults: [],
       displayedUsers: [],
+      displayedInfo: [],
       selectedUser: null,
       searchValue: ''
     }
@@ -34,12 +37,26 @@ class ContactsApp extends Component {
         }
     }
 
-    var foundInfo = [];
+    let searchResults = [];
 
-    var displayedUsers = CONTACTS.filter(el => {
+    CONTACTS.forEach(el => { //this finds all matches (except avatar)
+      let arr = [];
+      iterate(el, function (e) {
+        if (e!=el.general.avatar)
+           arr.push(e);
+      });
+
+      for (var i = 0; i < arr.length; i++) {
+          if(arr[i].toLowerCase().indexOf(inputValue) !== -1){
+            searchResults.push(el.foundValue = arr[i]);
+          }
+        }
+    });
+
+    var displayedUsers = CONTACTS.filter(el => { //this finds element by first match (except avatar)
 
       let arr = [];
-      iterate(el, function (e) {        
+      iterate(el, function (e) {
         if (e!=el.general.avatar)
            arr.push(e);
       });
@@ -53,7 +70,7 @@ class ContactsApp extends Component {
         }
     });
 
-
+   this.setState({searchResults:  searchResults});
    this.setState({displayedUsers: displayedUsers});
 
   }
@@ -68,6 +85,7 @@ class ContactsApp extends Component {
 
     let users;
 
+    // console.log(this.state.searchResults);
     //console.log(this.state.displayedUsers);
 
     let selectElem = this.selectElement;
@@ -82,6 +100,7 @@ class ContactsApp extends Component {
             color={(user==this.state.selectedUser) ? 'LightSkyBlue ' : 'white'}
             selectUser={this.handleSelectedUser.bind(this)}
             searchValue={this.state.searchValue}
+            searchResults={this.state.searchResults}
           />
         );
       });

@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Montserrat');
+* {
+  font-family: 'Raleway';
+}
+h5 {
+  font-size: 15px !important;
+}
 .left-column {
  float: left;
 }
@@ -6,7 +13,7 @@
   position: fixed;
   min-height: 800px;
   min-width: 1150px;
-  margin-left: 315px;
+  margin-left: 345px;
   border: solid black 1px;
 }
 
@@ -42,10 +49,11 @@
   font-size: 18px;
   font-weight: bold;
 }
-.user-phone {
+.user-job {
   font-size: 16px;
-  color: grey;
+  font-family: 'Lato';
 }
+. u
 .users {
   width: 315px;
 
@@ -65,4 +73,10 @@
 .user-detail-text h1 h2 h3 h4 {
   border-bottom: 1px solid grey;
   font-size: 15px;
+  font-family: 'Montserrat';
+}
+.user-detail-text h3 h4 {
+  border-bottom: 1px solid grey;
+  font-size: 15px;
+  font-family: 'Lato';
 }
