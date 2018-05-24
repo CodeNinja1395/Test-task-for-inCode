@@ -1,17 +1,28 @@
-import {FETCH_DATA} from '../actions/types';
+import {FETCH_DATA, SELECT_USER, SEARCH_USER} from '../actions/types';
 
 const initialState = {
-  items: []
+  users: [],
+  selectedUser: null
 }
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case FETCH_DATA:
-    console.log("reducer");
       return {
         ...state,
-        items: action.payload
+        users: action.payload.data
       };
+    case SELECT_USER:
+      return {
+        ...state,
+        selectedUser: action.payload.data
+      };
+    case SEARCH_USER:
+      return {
+        ...state,
+        users: action.payload.data
+      };
+
     default:
       return state;
 

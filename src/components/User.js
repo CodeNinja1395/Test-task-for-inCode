@@ -3,25 +3,13 @@ import '../css/style.css';
 
 
 class User extends Component {
-  constructor(){
-    super();
-    this.state = {
-      user: {}
-
-    }
-  }
-
-  componentWillMount(){
-    this.setState({user: this.props.user});
-  }
 
   handleSelectUser(){
-    this.props.selectUser(this.state.user);
+    this.props.selectUser(this.props.user);
   }
 
   getHighlightedText(text, higlight) {
     let searchIndex = text.toLowerCase().indexOf(higlight);
-
 
     let parts = text.split(new RegExp(`(${higlight})`, 'gi'));
     return <span> { parts.map((part, i) =>
@@ -32,7 +20,6 @@ class User extends Component {
   }
   render() {
     let user = this.props.user;
-  //  console.log(this.props.searchResults);
 
     if (this.props.searchValue) {
       return (

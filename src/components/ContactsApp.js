@@ -3,7 +3,7 @@ import User from './User.js';
 import SearchUser from './SearchUser.js';
 import ContactDetail from './ContactDetail.js';
 import { connect } from 'react-redux';
-import {fetchData} from '../actions/actions';
+import {fetchData, searchFilter} from '../actions/actions';
 import '../css/style.css';
 
 class ContactsApp extends Component {
@@ -20,11 +20,13 @@ class ContactsApp extends Component {
   }
 
   componentWillMount() {
+    console.log('hello from will');
     this.props.fetchData();
   }
 
   handleSearch(event){
-    let CONTACTS = this.props.items;
+    this.props.searchFilter(event);
+    let CONTACTS = this.props.users;
     let inputValue = event.target.value;
     this.setState({searchValue: inputValue});
     let iterate = function(obj, callback) {
@@ -40,20 +42,6 @@ class ContactsApp extends Component {
     }
 
     let searchResults = [];
-
-    CONTACTS.forEach(el => { //this finds all matches (except avatar)
-      let arr = [];
-      iterate(el, function (e) {
-        if (e!=el.general.avatar)
-           arr.push(e);
-      });
-
-      for (var i = 0; i < arr.length; i++) {
-          if(arr[i].toLowerCase().indexOf(inputValue) !== -1){
-            searchResults.push(el.foundValue = arr[i]);
-          }
-        }
-    });
 
     var displayedUsers = CONTACTS.filter(el => { //this finds element by first match (except avatar)
 
@@ -84,16 +72,12 @@ class ContactsApp extends Component {
 
 
   render() {
-
     let users;
-
-    // console.log(this.state.searchResults);
-    //console.log(this.state.displayedUsers);
 
     let selectElem = this.selectElement;
 
-    if (this.state.displayedUsers) {
-      users = this.state.displayedUsers.map(user => {
+    if (this.props.users) {
+      users = this.props.users.map(user => {
 
         return (
           <User
@@ -113,7 +97,7 @@ class ContactsApp extends Component {
       <div>
         <div className="left-column">
           <div className="users">
-              <SearchUser handleEvent= {this.handleSearch.bind(this)} />
+              <SearchUser handleEvent={this.handleSearch.bind(this)} />
               <ul className="usersList"> {users} </ul>
           </div>
         </div>
@@ -125,4 +109,10 @@ class ContactsApp extends Component {
     }
 }
 
-export default connect(null, {fetchData})(ContactsApp);
+const mapStateToProps = state => ({
+  users: state.data.users
+});
+
+
+
+export default connect(mapStateToProps, {fetchData, searchFilter})(ContactsApp);

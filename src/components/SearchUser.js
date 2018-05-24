@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { searchUser } from '../actions/actions';
 
 class SearchUser extends Component {
 
