@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import User from './User.js';
 import SearchUser from './SearchUser.js';
 import ContactDetail from './ContactDetail.js';
+import { connect } from 'react-redux';
+import {fetchData} from '../actions/actions';
 import '../css/style.css';
 
 class ContactsApp extends Component {
@@ -17,8 +19,8 @@ class ContactsApp extends Component {
 
   }
 
-  componentWillReceiveProps(newProps) {
-    this.setState({displayedUsers: newProps.items});
+  componentWillMount() {
+    this.props.fetchData();
   }
 
   handleSearch(event){
@@ -123,4 +125,4 @@ class ContactsApp extends Component {
     }
 }
 
-export default ContactsApp;
+export default connect(null, {fetchData})(ContactsApp);
