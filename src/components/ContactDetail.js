@@ -1,23 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class ContactDetail extends Component {
-  constructor(){
-    super();
-    this.state = {
-      user: null
-    }
-  }
-
-  componentWillReceiveProps(newProps) {
-    this.setState({user: newProps.selectedUser})
-  }
-
   render() {
     if(!this.props.selectedUser){
       return null;
     }
 
-    let selectedUser = this.state.user;
+    let selectedUser = this.props.selectedUser;
 
     return (
       <div className = "user-detail">
@@ -42,4 +32,8 @@ class ContactDetail extends Component {
 
   }
 }
-export default ContactDetail;
+const mapStateToProps = state => ({
+  selectedUser: state.data.selectedUser
+});
+
+export default connect(mapStateToProps,{})(ContactDetail);

@@ -1,8 +1,10 @@
-import {FETCH_DATA, SELECT_USER, SEARCH_USER} from '../actions/types';
+import {FETCH_DATA, SELECT_USER, FILTER_USERS, CHANGE_INPUT} from '../actions/types';
 
 const initialState = {
   users: [],
-  selectedUser: null
+  displayedUsers: [],
+  selectedUser: null,
+  searchValue: ''
 }
 
 export default function(state = initialState, action) {
@@ -10,21 +12,56 @@ export default function(state = initialState, action) {
     case FETCH_DATA:
       return {
         ...state,
-        users: action.payload.data
+        users: action.payload.data,
+
       };
     case SELECT_USER:
       return {
         ...state,
-        selectedUser: action.payload.data
+        selectedUser: action.payload
       };
-    case SEARCH_USER:
+    case CHANGE_INPUT:
       return {
         ...state,
-        users: action.payload.data
+        searchValue: action.payload
       };
 
     default:
       return state;
 
   }
+}
+
+export function filterUsers(state) {
+  let contacts = state.data.users;
+  let inputValue = state.data.searchValue;
+
+  let iterate = function(obj, callback) {
+      for (var property in obj) {
+          if (obj.hasOwnProperty(property)) {
+              if (typeof obj[property] === "object") {
+                  iterate(obj[property], callback);
+              } else {
+                  callback(obj[property]);
+              }
+          }
+      }
+  }
+
+  return contacts.filter(el => {
+
+    let arr = [];
+    iterate(el, function (e) {
+      if (e!==el.general.avatar)
+         arr.push(e);
+    });
+
+    for (var i = 0; i < arr.length; i++) {
+        if(arr[i].toLowerCase().indexOf(inputValue) !== -1){
+          el.foundValue = arr[i];
+          return arr[i];
+
+        }
+      }
+  });
 }

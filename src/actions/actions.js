@@ -1,4 +1,4 @@
-import {FETCH_DATA, SELECT_USER, SEARCH_USER} from './types';
+import {FETCH_DATA, SELECT_USER, FILTER_USERS, CHANGE_INPUT} from './types';
 import axios from 'axios';
 
 export const fetchData = () => dispatch => {
@@ -11,11 +11,17 @@ export const fetchData = () => dispatch => {
     );
 };
 
-export const searchFilter = (event) => dispatch => {
-  console.log('hello from searchFilter');
+export const searchFilter = (value) => dispatch => {
   dispatch({
-    type: SEARCH_USER,
-    payload: {}
-  })
+    type: CHANGE_INPUT,
+    payload: value
+  });
 };
-//export const selectUser = () => dispatch => {};
+
+export const selectContact = (user) => dispatch => {
+  console.log('hello from select');
+  dispatch({
+    type: SELECT_USER,
+    payload: user
+  })
+}
