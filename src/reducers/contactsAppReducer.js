@@ -1,4 +1,4 @@
-import {FETCH_DATA, SELECT_USER, FILTER_USERS, CHANGE_INPUT} from '../actions/types';
+import {FETCH_DATA, SELECT_USER, CHANGE_INPUT} from '../actions/types';
 
 const initialState = {
   users: [],

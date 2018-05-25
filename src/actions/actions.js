@@ -1,4 +1,4 @@
-import {FETCH_DATA, SELECT_USER, FILTER_USERS, CHANGE_INPUT} from './types';
+import {FETCH_DATA, SELECT_USER, CHANGE_INPUT} from './types';
 import axios from 'axios';
 
 export const fetchData = () => dispatch => {

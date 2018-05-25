@@ -18,10 +18,8 @@ class ContactsApp extends Component {
 
   }
 
-
   render() {
     let users;
-    let selectElem = this.selectElement;
 
     if (this.props.displayedUsers) {
       users = this.props.displayedUsers.map(user => {
@@ -30,7 +28,7 @@ class ContactsApp extends Component {
           <User
             key={user.contact.phone}
             user={user}
-            color={(user==this.props.selectedUser) ? 'LightSkyBlue ' : 'white'}
+            color={(user===this.props.selectedUser) ? 'LightSkyBlue ' : 'white'}
           />
         );
       });
